@@ -3,8 +3,6 @@ package link.portalbox.api.plugin;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.BasicQuery;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +17,7 @@ public class PluginController {
     @Autowired
     private PluginRepository repository;
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> fromId(@PathVariable("id") int id) {
@@ -29,13 +27,10 @@ public class PluginController {
 
     @GetMapping("/file/{sha}")
     public ResponseEntity<Object> fromSha(@PathVariable("sha") String sha256) {
-        Plugin plugin = /*repository.findOne();*/null;
+        Plugin plugin = /*repository.findOne();*/null; // TODO: Implement
         JsonObject obj = new JsonObject();
         obj.addProperty("id", plugin.getId());
         obj.addProperty("malware", plugin.getFiles().containsKey(sha256) ? plugin.getFiles().get(sha256) + "" : "null");
         return ResponseEntity.accepted().body(gson.toJson(obj));
     }
-
-
-
 }

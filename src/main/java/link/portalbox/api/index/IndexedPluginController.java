@@ -12,12 +12,11 @@ import java.util.HashMap;
 @RequestMapping(value = "/index", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class IndexedPluginController {
 
-    private HashMap<Integer, String> indexCache = new HashMap<>();
-    private Gson gson = new Gson();
+    private final HashMap<Integer, String> indexCache = new HashMap<>();
+    private final Gson gson = new Gson();
 
     @GetMapping
     public ResponseEntity<Object> index() {
         return ResponseEntity.accepted().body(gson.toJson(indexCache));
     }
-
 }

@@ -14,5 +14,4 @@ public final class ErrorController implements org.springframework.boot.web.servl
     public String handleError() {
         return "{\"status\": 400, \"message\": \"Unknown request mapping provided.\"}";
     }
-
 }
